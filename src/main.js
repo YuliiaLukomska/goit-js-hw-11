@@ -9,15 +9,25 @@ refs.form.addEventListener('submit', onSearchImage);
 
 function onSearchImage(event) {
   event.preventDefault();
-  searchImage()
-    .then(data => console.log(data))
+  const form = event.currentTarget;
+  const inputValue = form.elements.image.value;
+
+  searchImage(inputValue)
+    .then(data => {
+      console.log(data);
+      if (data.total === 0) {
+        alert(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+      }
+    })
     .catch(error => console.log(error));
 }
 
-function searchImage() {
+function searchImage(inputValue) {
   const urlParam = new URLSearchParams({
     key: API_KEY,
-    q: 'yellow+flower',
+    q: inputValue,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: 'true',
