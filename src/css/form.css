@@ -9,6 +9,7 @@
   align-items: center;
   gap: 8px;
   margin: 0 auto;
+  margin-bottom: 16px;
 }
 
 input {
@@ -30,4 +31,32 @@ button {
   align-items: center;
   border-radius: 8px;
   background: #4e75ff;
+}
+
+.gallery {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.gallery-item {
+  width: 250px;
+  height: 250px;
+  border: black;
+}
+.gallery-img {
+  width: 250px;
+  height: 200px;
+}
+.description-wrapper {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+.value-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

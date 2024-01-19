@@ -5,6 +5,7 @@ import icon from './img/left-close.svg';
 const refs = {
   form: document.querySelector('form'),
   button: document.querySelector('button'),
+  list: document.querySelector('ul'),
 };
 const API_KEY = '41896397-c8b989416d0fb53fd1030eb96';
 const BASE_URL = 'https://pixabay.com/api/';
@@ -16,9 +17,13 @@ function onSearchImage(event) {
   const form = event.currentTarget;
   const inputValue = form.elements.image.value;
 
-  searchImage(inputValue)
+  fetchOnImage(inputValue)
     .then(data => {
       console.log(data);
+      refs.list.innerHTML = createGaleryMarkup(data);
+
+      // markup creation add here
+
       if (data.hits.length === 0) {
         iziToast.error({
           message:
@@ -40,7 +45,7 @@ function onSearchImage(event) {
     });
 }
 
-function searchImage(inputValue) {
+function fetchOnImage(inputValue) {
   const urlParam = new URLSearchParams({
     key: API_KEY,
     q: inputValue,
@@ -57,4 +62,32 @@ function searchImage(inputValue) {
   });
 }
 
-function createGaleryMarkup() {}
+function createGaleryMarkup(data) {
+  return data.hits
+    .map(
+      img => `<li class="gallery-item">
+          <a class="gallery-link" href="${img.largeImageURL}"
+            ><img class="gallery-img" src="${img.webformatURL}" data-sourse="${img.largeImageURL}" alt="${img.tags}"
+          /></a>
+          <div class="description-wrapper">
+            <div class="value-wrapper">
+              <p class="label"><b>Likes</b></p>
+              <p class="value">${img.likes}</p>
+            </div>
+            <div class="value-wrapper">
+              <p class="label"><b>Views</b></p>
+              <p class="value">${img.views}</p>
+            </div>
+            <div class="value-wrapper">
+              <p class="label"><b>Comments</b></p>
+              <p class="value">${img.comments}</p>
+            </div>
+            <div class="value-wrapper">
+              <p class="label"><b>Downloads</b></p>
+              <p class="value">${img.downloads}</p>
+            </div>
+          </div>
+        </li>`
+    )
+    .join('');
+}
