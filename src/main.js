@@ -1,6 +1,8 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import icon from './img/left-close.svg';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   form: document.querySelector('form'),
@@ -91,3 +93,7 @@ function createGaleryMarkup(data) {
     )
     .join('');
 }
+
+let lightbox = new SimpleLightbox('.gallery a', {
+  /* options */
+});
