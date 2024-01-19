@@ -15,8 +15,16 @@
 input {
   width: 272px;
   height: 40px;
+  padding: 8px 16px;
   border-radius: 4px;
-  border-color: #808080;
+  border: 1px solid #808080;
+}
+input:hover,
+input:focus {
+  border-color: #000000;
+}
+input:focus-within {
+  border-color: #4e75ff;
 }
 
 button {
@@ -33,6 +41,9 @@ button {
   border-radius: 8px;
   background: #4e75ff;
   border-color: beige;
+}
+button:hover {
+  background-color: #6c8cff;
 }
 
 .gallery {
