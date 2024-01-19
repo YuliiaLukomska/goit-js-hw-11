@@ -5,6 +5,8 @@
 .search-form {
   width: 371px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
   margin: 0 auto;
 }

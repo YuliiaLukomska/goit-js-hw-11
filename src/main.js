@@ -1,3 +1,7 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import icon from './img/left-close.svg';
+
 const refs = {
   form: document.querySelector('form'),
   button: document.querySelector('button'),
@@ -16,12 +20,24 @@ function onSearchImage(event) {
     .then(data => {
       console.log(data);
       if (data.total === 0) {
-        alert(
-          'Sorry, there are no images matching your search query. Please try again!'
-        );
+        iziToast.error({
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+          messageColor: '#FAFAFB',
+          messageLineHeight: '24px',
+          messageSize: '16px',
+          position: 'topRight',
+          iconUrl: icon,
+          backgroundColor: '#EF4040',
+          maxWidth: '350px',
+          timeout: false,
+        });
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error))
+    .finally(() => {
+      form.reset();
+    });
 }
 
 function searchImage(inputValue) {
