@@ -16,12 +16,12 @@ refs.form.addEventListener('submit', onSearchImage);
 
 function onSearchImage(event) {
   event.preventDefault();
+  refs.list.innerHTML = '<span class="loader"></span>';
   const form = event.currentTarget;
   const inputValue = form.elements.image.value;
 
   fetchOnImage(inputValue)
     .then(data => {
-      console.log(data);
       refs.list.innerHTML = createGaleryMarkup(data);
 
       let lightbox = new SimpleLightbox('.gallery a', {
