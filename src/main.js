@@ -19,7 +19,7 @@ function onSearchImage(event) {
   searchImage(inputValue)
     .then(data => {
       console.log(data);
-      if (data.total === 0) {
+      if (data.hits.length === 0) {
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
@@ -56,3 +56,5 @@ function searchImage(inputValue) {
     }
   });
 }
+
+function createGaleryMarkup() {}
