@@ -24,7 +24,11 @@ function onSearchImage(event) {
       console.log(data);
       refs.list.innerHTML = createGaleryMarkup(data);
 
-      // markup creation add here
+      let lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+      });
+      lightbox.refresh();
 
       if (data.hits.length === 0) {
         iziToast.error({
@@ -93,7 +97,3 @@ function createGaleryMarkup(data) {
     )
     .join('');
 }
-
-let lightbox = new SimpleLightbox('.gallery a', {
-  /* options */
-});
