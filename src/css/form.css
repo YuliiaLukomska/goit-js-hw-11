@@ -16,6 +16,7 @@ input {
   width: 272px;
   height: 40px;
   border-radius: 4px;
+  border-color: #808080;
 }
 
 button {
@@ -31,6 +32,7 @@ button {
   align-items: center;
   border-radius: 8px;
   background: #4e75ff;
+  border-color: beige;
 }
 
 .gallery {
