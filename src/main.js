@@ -22,6 +22,7 @@ refs.form.addEventListener('submit', onSearchImage);
 function onSearchImage(event) {
   event.preventDefault();
   refs.loader.classList.add('loader');
+  refs.list.innerHTML = '';
   const form = event.currentTarget;
   const inputValue = form.elements.image.value;
 
