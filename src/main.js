@@ -3,11 +3,16 @@ import 'izitoast/dist/css/iziToast.min.css';
 import icon from './img/left-close.svg';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 const refs = {
   form: document.querySelector('form'),
   button: document.querySelector('button'),
   list: document.querySelector('ul'),
+  loader: document.querySelector('span'),
 };
 const API_KEY = '41896397-c8b989416d0fb53fd1030eb96';
 const BASE_URL = 'https://pixabay.com/api/';
@@ -16,18 +21,15 @@ refs.form.addEventListener('submit', onSearchImage);
 
 function onSearchImage(event) {
   event.preventDefault();
-  refs.list.innerHTML = '<span class="loader"></span>';
+  refs.loader.classList.add('loader');
   const form = event.currentTarget;
   const inputValue = form.elements.image.value;
 
   fetchOnImage(inputValue)
     .then(data => {
+      refs.loader.classList.remove('loader');
       refs.list.innerHTML = createGaleryMarkup(data);
 
-      let lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-      });
       lightbox.refresh();
 
       if (data.hits.length === 0) {
@@ -45,7 +47,19 @@ function onSearchImage(event) {
         });
       }
     })
-    .catch(error => console.log(error))
+    .catch(error =>
+      iziToast.error({
+        message: 'Error',
+        messageColor: '#FAFAFB',
+        messageLineHeight: '24px',
+        messageSize: '16px',
+        position: 'topRight',
+        iconUrl: icon,
+        backgroundColor: '#EF4040',
+        maxWidth: '350px',
+        timeout: false,
+      })
+    )
     .finally(() => {
       form.reset();
     });

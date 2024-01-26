@@ -79,7 +79,8 @@ button:hover {
   border: 5px solid #fff;
   border-bottom-color: #ff3d00;
   border-radius: 50%;
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
